@@ -1,0 +1,26 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+
+<dom-module id="gifn-feed">
+    <style>
+        img {
+            width:100%;
+        }
+    </style>
+
+    <template>
+        <p>{{ test }}</p>
+        <img class="" src="#" alt="Gifn Feed Image" />
+    </template>
+
+    <script>
+        Polymer({
+            is: "gifn-feed",
+            properties: {
+                test: {
+                    type: String,
+                    value: 'Test test hi hi!'
+                }
+            }
+        });
+    </script>
+</dom-module>
