@@ -1,0 +1,34 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+
+<dom-module id="gifn-card">
+    <style>
+        img {
+            width:100%;
+        }
+    </style>
+
+    <template>
+        <video autoplay="" id="video" loop="" muted="" type="video/mp4" preload="auto"
+               src={{ video }}></video>
+        <script type="text/javascript">
+
+        </script>
+    </template>
+
+    <script>
+        var video = document.getElementById('video');
+        video.addEventListener('click',function(){
+            video.play();
+        },false);
+
+        Polymer({
+            is: "gifn-card",
+            properties: {
+                video: {
+                    type: String,
+                    value: 'https://rest.gifn.it/asset/gifn/p533.mp4'
+                }
+            }
+        });
+    </script>
+</dom-module>
