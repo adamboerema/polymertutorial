@@ -1,0 +1,48 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+
+<dom-module id="gifn-feed">
+    <style>
+        img {
+            display:inline-block;
+        }
+    </style>
+
+    <template>
+        <template is="dom-repeat" items="{{gifns}}">
+            <img src="{{item.url}}" />
+        </template>
+    </template>
+
+    <script>
+        Polymer({
+            is: "gifn-feed",
+            ready: function() {
+                var self = this;
+                var xhr = new XMLHttpRequest();
+                var baseUrl = 'http://gifnrest.local';
+
+                self.gifns = [];
+
+                // Send an ajax request to get the gif data
+                xhr.open('GET', baseUrl + '/gif/prplhq');
+                xhr.send();
+                xhr.onreadystatechange = function() {
+                    if(xhr.readyState == 4 && xhr.status == 200){
+                        var gifns = [];
+                        var response = JSON.parse(xhr.responseText);
+
+                        //Build out the urls for the 5 latest gifs
+                        for(var i = 0; i < 5; i++){
+                            var gifUrl = baseUrl + '/asset/prplhq/' + response.gifs[i].slug + '.thumb.gif';
+                            gifns.push({ url: gifUrl });
+                        }
+
+                        // Bind the response to the {{gifns}} repeater, which will
+                        // automatically update the view
+                        self.gifns = gifns;
+                    }
+                }
+            }
+        });
+    </script>
+</dom-module>
