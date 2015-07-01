@@ -19,7 +19,7 @@
             ready: function() {
                 var self = this;
                 var xhr = new XMLHttpRequest();
-                var baseUrl = 'http://gifnrest.local';
+                var baseUrl = 'http://rest.gifn.it';
 
                 self.gifns = [];
 
@@ -37,8 +37,7 @@
                             gifns.push({ url: gifUrl });
                         }
 
-                        // Bind the response to the {{gifns}} repeater, which will
-                        // automatically update the view
+                        // Bind the response back to the {{gifns}} repeater
                         self.gifns = gifns;
                     }
                 }
