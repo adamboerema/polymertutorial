@@ -16,15 +16,20 @@
     <script>
         Polymer({
             is: "gifn-feed",
+            properties: {
+              event: String
+            },
             ready: function() {
                 var self = this;
                 var xhr = new XMLHttpRequest();
-                var baseUrl = 'http://rest.gifn.it';
+                var baseUrl = 'https://rest.gifn.it';
 
                 self.gifns = [];
 
+                console.log(this);
+
                 // Send an ajax request to get the gif data
-                xhr.open('GET', baseUrl + '/gif/prplhq');
+                xhr.open('GET', baseUrl + '/gif/' + self.event);
                 xhr.send();
                 xhr.onreadystatechange = function() {
                     if(xhr.readyState == 4 && xhr.status == 200){
@@ -33,7 +38,7 @@
 
                         //Build out the urls for the 5 latest gifs
                         for(var i = 0; i < 5; i++){
-                            var gifUrl = baseUrl + '/asset/prplhq/' + response.gifs[i].slug + '.thumb.gif';
+                            var gifUrl = baseUrl + '/asset/' + self.event  + '/' + response.gifs[i].slug + '.thumb.gif';
                             gifns.push({ url: gifUrl });
                         }
 
