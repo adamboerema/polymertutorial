@@ -144,7 +144,7 @@ This line is responsible for initializing the ajax request to our API, but self.
 
 	self.gifns = gifns;
 
-This time instead of taking a value from our component's element attribute, we are creating an array of urls inside the component that can then be used throughout.
+This time instead of taking a value from our component's element attribute, we are creating an array of urls inside the component that can then be used throughout. Polymer is flexible in that it allows for both one-way and two-way data binding.
 
 Now that we have our data set, let's create the view for our component. Above our script tag add
 
@@ -178,7 +178,7 @@ You all would probably agree this is the better and cleaner option
         <img src="https://rest.gifn.it/asset/{{event}}/{{item.slug}}.thumb.gif" />
     </template>
 
-However, this is currently not possible and is probably one of the biggest downfalls of the template builder in Polymer 1.0. String concatenation and whitespace with variables is currently not supported in Polymer. Each element must take up the entire space of a view's element or the entire space of a string in an attribute. 
+However, this is currently not possible and is probably one of the biggest downfalls of the template builder in Polymer 1.0. String concatenation and whitespace with view variables is currently not supported in Polymer. Each element must take up the entire space of a view's element or the entire space of a string in an attribute. 
 
 For example, this will work
 
@@ -196,7 +196,7 @@ To finalize the view, let's add a touch of css to our component to make everythi
         }
     </style>
 
-Alright, maybe not that fancy but I really hate floats. Another great feature of Polymer is that it keeps your component's css local so you do not need to worry about conflicting css rules.
+Alright, maybe not that fancy, but I really hate floats. Another great feature of Polymer is that it keeps your component's css local so you do not need to worry about conflicting css rules.
 
 And that's it! Here is the polymer component in it's entirety
 
@@ -258,4 +258,6 @@ To view your polymer component you will need to host it through some type of ser
 
 Enjoy!
 
-You can check out this entire project on my github at https://github.com/adamboerema/polymertutorial and all the documentation can be found at https://www.polymer-project.org/1.0/ and http://webcomponents.org/
+A working demo can be seen at http://polymer.gifn.it and all of the source code can be viewed on my github at https://github.com/adamboerema/polymertutorial
+
+For further documentation check out https://www.polymer-project.org/1.0/ and http://webcomponents.org/
