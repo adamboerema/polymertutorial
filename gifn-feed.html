@@ -25,9 +25,7 @@
                 var baseUrl = 'https://rest.gifn.it';
 
                 self.gifns = [];
-
-                console.log(this);
-
+                
                 // Send an ajax request to get the gif data
                 xhr.open('GET', baseUrl + '/gif/' + self.event);
                 xhr.send();
