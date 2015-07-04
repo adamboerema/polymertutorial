@@ -1,8 +1,16 @@
-For all the frontend developers who just got comfortable with last week's tools, Google's Polymer version 1.0 announced at Google I/O is about to modernize your image of the "widget." Known as Web Components, Polymer streamlines the process of implementing the Web Component standard and adds cross-browser support that makes Polymer just about production ready.
+For all the frontend developers who just started to feel comfortable with last week's tools, Google's Polymer version 1.0 announced at Google I/O is about to modernize your image of the "widget." Known as Web Components, Polymer streamlines the process of implementing the Web Component standard and adds cross-browser support that makes Polymer just about production ready.
 
 To give a better example to why Polymer and Web Components are so great, I'm going to build a photo stream component using the API from our gif photo booth app called Gifn. I'll explain each part as we go along.
 
-To install Polymer we are going to use Bower, which is a package management tool for javascript. If you do not have Bower installed you can do so in the terminal with
+First create a new folder in the command line using
+	
+	mkdir polymer_tutorial
+
+And then enter the folder using
+	
+	cd polymer_tutorial
+
+To install Polymer we are going to use Bower, which is a package management tool for javascript. If you do not have Bower installed you can do so with
 
 	npm install -g bower
 
@@ -10,7 +18,7 @@ and then initialize bower
 
 	bower init
 
-Follow the prompts from bower. If you are in doubt on what to answer, just push enter and use the default option. After bower intializes it should place a bower.json file in your directory. To add Polymer as a dependency run this command
+Follow the prompts from bower. If you are not sure how to answer a question, just push enter and use the default option. After bower intializes it should place a bower.json file in your directory. To add Polymer as a dependency run this command
 
 	bower install --save Polymer/polymer#^1.0.0
 
@@ -18,7 +26,7 @@ You should now have a bower_components/ folder in your directory that contains P
 
 From here, add two files to your root directory. Add an index.html file and a gifn-feed.html file that will contain your Polymer component. Your directory should now look something like this
 
-	my_polymer_directory/
+	polymer_tutorial/
 		bower_components/
 		bower.json
 		gifn-feed.html
@@ -52,7 +60,7 @@ And then our actual web component in use
 
 	<gifn-feed event="prplhq"></gifn-feed>
 
-Everything looks pretty normal except for the actual web component. The <gifn-feed></gifn-feed> element is obviously not your normal html and event="prplhq" is not an attribute you would expect either. This will all make sense once we start fleshing out the component. Let's get started.
+Everything looks pretty normal except for the actual web component. The gifn-feed element is obviously not your normal html and event="prplhq" is not an attribute you would expect either. This will all make sense once we start fleshing out the component. Let's get started.
 
 First open up the gifn-feed.html file and add the required base Polymer element at the top of your file
 
@@ -81,7 +89,7 @@ Now for the fun part. Let's initialize the polymer component with the base setup
 
 	</dom-module>
 
-The "is:" attribute tells Polymer to look for an element with the tag <gifn-feed></gifn-feed> and the "properties:" attribute tells Polymer to look for an "event" attribute on that tag that will have a value that is a string. 
+The "is:" attribute tells Polymer to look for an element with the tag gifn-feed and the "properties:" attribute tells Polymer to look for an "event" attribute that will have a string value. 
 
 Our web component still does not do anything, it's simply initialized. To add an action to the component you can use one of the lifecycle callbacks or in our case, use the "ready" callback for when our component's DOM has been initialized. Here is the gifn-feed component with the "ready" callback
 
