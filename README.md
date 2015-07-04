@@ -91,7 +91,7 @@ Now for the fun part. Let's initialize the polymer component with the base setup
 
 The "is:" attribute tells Polymer to look for an element with the tag gifn-feed and the "properties:" attribute tells Polymer to look for an "event" attribute that will have a string value. 
 
-Our web component still does not do anything, it's simply initialized. To add an action to the component you can use one of the lifecycle callbacks or in our case, use the "ready" callback for when our component's DOM has been initialized. Here is the gifn-feed component with the "ready" callback
+Our web component still does nothing, it's simply initialized. To add an action to the component, you can use one of the lifecycle callbacks, or in our case, use the "ready" callback for when our component's DOM has been initialized. Here is the gifn-feed component with the "ready" callback
 
 	<dom-module id="gifn-feed">
 		<script>
@@ -151,7 +151,7 @@ Now that we have our data set, let's create the view for our component. Above ou
 	<template>
     </template>
 
-This is the base template tag required for all views. Inside of the template tag you can add html, other imported polymer web components, and even some special helper elements used for if statements and looping through data. Since we have an array of urls, let's add a dom-repeat helper tag
+This is the base template tag required for all views. Inside of the template tag you can add html, other imported polymer web components, and even some special helper elements used for if-statements and looping through data. Since we have an array of urls, let's add a dom-repeat helper tag
 
 	<template>
         <template is="dom-repeat" items="{{gifns}}">
@@ -159,7 +159,7 @@ This is the base template tag required for all views. Inside of the template tag
         </template>
     </template>
 
-Notice the {{gifns}} value in the items tag? This is how you directly access attributes bound to your polymer object. So if you wanted you could also add a title for the event like so
+Notice the {{gifns}} value in the items tag? This is how you directly access attributes bound to your polymer object. So if you wanted, you could also add a title for the event like so
 	
 	<h1>{{event}}</h1>
 
@@ -222,6 +222,7 @@ And that's it! Here is the polymer component in it's entirety
 	              event: String
 	            },
 	            ready: function() {
+
 	                var self = this;
 	                var xhr = new XMLHttpRequest();
 	                var baseUrl = 'https://rest.gifn.it';
@@ -232,15 +233,18 @@ And that's it! Here is the polymer component in it's entirety
 	                xhr.send();
 	                xhr.onreadystatechange = function() {
 	                    if(xhr.readyState == 4 && xhr.status == 200){
+
 	                        var gifns = [];
 	                        var response = JSON.parse(xhr.responseText);
+
 	                        //Build out the urls for the 5 latest gifs
 	                        for(var i = 0; i < 5; i++){
 	                            var gifUrl = baseUrl + '/asset/' + self.event  + '/' + response.gifs[i].slug + '.thumb.gif';
 	                            gifns.push({ url: gifUrl });
 	                        }
+
 	                        // Bind the response back to the {{gifns}} repeater
-	                        self.gifns = gifns;
+	                        self.gifns = gifns;`
 	                    }
 	                }
 	            }
