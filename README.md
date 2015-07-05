@@ -14,7 +14,7 @@ To install Polymer we are going to use Bower, which is a package management tool
 
 	npm install -g bower
 
-and then initialize bower
+and then initialize bower.
 
 	bower init
 
@@ -32,7 +32,7 @@ From here, add two files to your root directory. Add an index.html file and a gi
 		gifn-feed.html
 		index.html
 
-First let's open up the index.html file and setup our html to display the polymer component. Here is all of the html needed to use a simple component
+First let's open up the index.html file and setup our html to display the polymer component. Here is all of the html needed to use a simple component.
 
 	<!doctype html>
 	<html>
@@ -52,7 +52,7 @@ There are three main parts to initializing the component in your index.html file
 
 This library is required for all Polymer components and any custom components you create yourself. There is also a smaller webcomponents-lite.min.js library that can be used in replacement if you are only building elements for browsers that currently support the Web Components API (Chrome 36+ for example).
 
-Next is the link tag importing our gifn-feed web component to be used
+Next is the link tag importing our gifn-feed web component to be used.
 
 	<link rel="import" href="gifn-feed.html">
 
@@ -73,7 +73,7 @@ Since gifn-feed is going to be used in our html, we are going to initialize it a
 	<dom-module id="gifn-feed">
 	</dom-module>
 
-Now for the fun part. Let's initialize the polymer component with the base setup inside a script tag
+Now for the fun part. Let's initialize the polymer component with the base setup inside a script tag.
 
 	<dom-module id="gifn-feed">
 
@@ -91,7 +91,7 @@ Now for the fun part. Let's initialize the polymer component with the base setup
 
 The "is:" attribute tells Polymer to look for an element with the tag gifn-feed and the "properties:" attribute tells Polymer to look for an "event" attribute that will have a string value. 
 
-Our web component still does nothing, it's simply initialized. To add an action to the component, you can use one of the lifecycle callbacks, or in our case, use the "ready" callback for when our component's DOM has been initialized. Here is the gifn-feed component with the "ready" callback
+Our web component still does nothing, it's simply initialized. To add an action to the component, you can use one of the lifecycle callbacks, or in our case, use the "ready" callback for when our component's DOM has been initialized. Here is the gifn-feed component with the "ready" callback.
 
 	<dom-module id="gifn-feed">
 		<script>
@@ -132,15 +132,15 @@ Our web component still does nothing, it's simply initialized. To add an action 
 
 	</dom-module>
 
-What we are doing in this ready function is making an ajax request to the Gifn API to retrieve a list of gif images. We then build out the urls and place them in an array that is set to our polymer object. Let me explain some of the more important aspects
+What we are doing in this ready function is making an ajax request to the Gifn API to retrieve a list of gif images. We then build out the urls and place them in an array that is set to our polymer object. Let me explain some of the more important aspects.
 
 	var self = this;
 
-Although this is a common practice for dealing with internal scope in javascript functions, it's especially important to have access to the parent polymer object so you can bind data to the view. Here's an example of it being used
+Although this is a common practice for dealing with internal scope in javascript functions, it's especially important to have access to the parent polymer object so you can bind data to the view. Here's an example of it being used.
 
 	xhr.open('GET', baseUrl + '/gif/' + self.event);
 
-This line is responsible for initializing the ajax request to our API, but self.event is what makes it truly special. Remember the event="prplhq" attribute on our gifn-feed tag? It is now directly bound to our polymer object for use in the javascript, html template and even in our component's css. Here's another example
+This line is responsible for initializing the ajax request to our API, but self.event is what makes it truly special. Remember the event="prplhq" attribute on our gifn-feed tag? It is now directly bound to our polymer object for use in the javascript, html template and even in our component's css. Here's another example.
 
 	self.gifns = gifns;
 
@@ -151,7 +151,7 @@ Now that we have our data set, let's create the view for our component. Above ou
 	<template>
     </template>
 
-This is the base template tag required for all views. Inside of the template tag you can add html, other imported polymer web components, and even some special helper elements used for if-statements and looping through data. Since we have an array of urls, let's add a dom-repeat helper tag
+This is the base template tag required for all views. Inside of the template tag you can add html, other imported polymer web components, and even some special helper elements used for if-statements and looping through data. Since we have an array of urls, let's add a dom-repeat helper tag.
 
 	<template>
         <template is="dom-repeat" items="{{gifns}}">
@@ -165,14 +165,14 @@ Notice the {{gifns}} value in the items tag? This is how you directly access att
 
 In the case of the special dom-repeat element, it requres an "items" attribute that references an array value. The dom-repeat element will then loop through the array with each value being accessed using the "item" variable.
 
-After seeing the completed view, some of you may be wondering why I chose to make this string concatenation mess in the ready function
+After seeing the completed view, some of you may be wondering why I chose to make this string concatenation mess in the ready function.
 
     for(var i = 0; i < 5; i++){
         var gifUrl = baseUrl + '/asset/' + self.event  + '/' + response.gifs[i].slug + '.thumb.gif';
         gifns.push({ url: gifUrl });
     }
 
-You all would probably agree this is the better and cleaner option
+You all would probably agree this is the better and cleaner option.
 
 	<template is="dom-repeat" items="{{gifns}}">
         <img src="https://rest.gifn.it/asset/{{event}}/{{item.slug}}.thumb.gif" />
@@ -180,7 +180,7 @@ You all would probably agree this is the better and cleaner option
 
 However, this is currently not possible and is probably one of the biggest downfalls of the template builder in Polymer 1.0. String concatenation and whitespace with view variables is currently not supported in Polymer. Each element must take up the entire space of a view's element or the entire space of a string in an attribute. 
 
-For example, this will work
+For example, this will work.
 
 	<h1>Welcome <span>{{name}}</span></h1>
 
@@ -188,7 +188,7 @@ but this will not
 	
 	<h1>Welcome {{name}}</h1>
 	
-To finalize the view, let's add a touch of css to our component to make everything a little more fancy. Let's add this style block above our template tags
+To finalize the view, let's add a touch of css to our component to make everything a little more fancy. Let's add this style block above our template tags.
 
 	<style>
         img {
@@ -198,7 +198,7 @@ To finalize the view, let's add a touch of css to our component to make everythi
 
 Alright, maybe not that fancy, but I really hate floats. Another great feature of Polymer is that it keeps your component's css local so you do not need to worry about conflicting css rules.
 
-And that's it! Here is the polymer component in it's entirety
+And that's it! Here is the polymer component in it's entirety.
 
 	<link rel="import" href="bower_components/polymer/polymer.html">
 
