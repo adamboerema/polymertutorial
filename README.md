@@ -105,7 +105,7 @@ Our web component still does nothing, it's simply initialized. To add an action 
 	            ready: function() {
 	                var self = this;
 	                var xhr = new XMLHttpRequest();
-	                var baseUrl = 'https://rest.gifn.it';
+	                var baseUrl = 'http://demo.gifn.it';
 	                self.gifns = [];
 	                
 	                // Send an ajax request to get the gif data
@@ -175,7 +175,7 @@ After seeing the completed view, some of you may be wondering why I chose to mak
 You all would probably agree this is the better and cleaner option.
 
 	<template is="dom-repeat" items="{{gifns}}">
-        <img src="https://rest.gifn.it/asset/{{event}}/{{item.slug}}.thumb.gif" />
+        <img src="https://demo.gifn.it/asset/{{event}}/{{item.slug}}.thumb.gif" />
     </template>
 
 However, this is currently not possible and is probably one of the biggest downfalls of the template builder in Polymer 1.0. String concatenation and whitespace with view variables is currently not supported in Polymer. Each element must take up the entire space of a view's element or the entire space of a string in an attribute. 
@@ -225,7 +225,7 @@ And that's it! Here is the polymer component in it's entirety.
 
 	                var self = this;
 	                var xhr = new XMLHttpRequest();
-	                var baseUrl = 'https://rest.gifn.it';
+	                var baseUrl = 'http://demo.gifn.it';
 	                self.gifns = [];
 	                
 	                // Send an ajax request to get the gif data
